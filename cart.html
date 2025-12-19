@@ -11,10 +11,12 @@ button { padding:10px; width:100%; background:#2e7d32; color:white; border:none;
 button:hover { background:#1b5e20; }
 input, select { padding:8px; width:100%; border-radius:5px; border:1px solid #ccc; margin-top:5px; margin-bottom:10px; }
 #order-section { background:#e0f2f1; padding:15px; border-radius:8px; margin-top:20px; }
+.back-link { display:inline-block; margin-bottom:20px; color:#1b5e20; font-weight:bold; text-decoration:none; }
 </style>
 </head>
 <body>
 
+<a href="../index.html" class="back-link">⬅ Back to Store</a>
 <h2>Your Cart</h2>
 <div id="cart-items"></div>
 
@@ -46,7 +48,7 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
 const container = document.getElementById("cart-items");
 
 async function loadCart() {
-  const res = await fetch('/products');
+  const res = await fetch("../products.json"); // <-- local JSON
   const products = await res.json();
   container.innerHTML = "";
 

@@ -132,8 +132,8 @@ button:hover{background:#1b5e20}
 <body>
 
 <div id="cart-count">Cart: 0</div>
-<a id="admin-link" href="admin.html">Admin</a>
-<a id="view-cart" href="cart.html">View Cart</a>
+<a id="admin-link" href="admin/admin.html">Admin</a>
+<a id="view-cart" href="cart/cart.html">View Cart</a>
 
 <h1 class="wordart">MILNAPATH HERBAL PRODUCTS STORE</h1>
 <p style="text-align:center;color:#2e7d32;font-weight:bold">
@@ -183,7 +183,7 @@ function updateCartCount(){
 }
 
 async function loadProducts(){
-  const res = await fetch("/products");
+  const res = await fetch("products.json"); // <-- fetch local JSON
   const data = await res.json();
 
   allProducts = data.map(p=>({
