@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MILNAPATH HERBAL PRODUCTS STORE</title>
+
+<style>
+body{
+  font-family:Arial,sans-serif;
+  background:#f0f7f1;
+  margin:0;
+  padding:20px;
+}
+
+/* WordArt Header */
+h1.wordart{
+  text-align:center;
+  font-size:48px;
+  font-weight:900;
+  background:linear-gradient(90deg,#2e7d32,#a5d6a7,#1b5e20);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:2px 2px 4px rgba(0,0,0,.3);
+}
+
+/* Fixed UI */
+#cart-count{
+  position:fixed;
+  top:15px;
+  right:20px;
+  background:#2e7d32;
+  color:#fff;
+  padding:8px 12px;
+  border-radius:20px;
+}
+a{
+  text-decoration:none;
+  font-weight:bold;
+}
+#admin-link{
+  position:fixed;
+  top:55px;
+  right:20px;
+  background:#1b5e20;
+  color:#fff;
+  padding:6px 10px;
+  border-radius:5px;
+}
+#view-cart{
+  position:fixed;
+  top:95px;
+  right:20px;
+  color:#2e7d32;
+}
+
+/* Filters */
+.filters{
+  max-width:600px;
+  margin:20px auto;
+  display:flex;
+  gap:10px;
+}
+.filters input,.filters select{
+  flex:1;
+  padding:8px;
+  border-radius:5px;
+  border:1px solid #ccc;
+}
+
+/* Products */
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+.card{
+  background:#fff;
+  padding:15px;
+  border-radius:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+.card img{
+  width:100%;
+  height:180px;
+  object-fit:contain;
+}
+.price{color:#2e7d32;font-weight:bold}
+button{
+  width:100%;
+  padding:10px;
+  border:none;
+  background:#2e7d32;
+  color:#fff;
+  border-radius:5px;
+  cursor:pointer;
+}
+button:hover{background:#1b5e20}
+
+/* Testimonials */
+.testimonial-wrapper{
+  margin:40px 0;
+  background:#e0f2f1;
+  overflow:hidden;
+  border-radius:8px;
+}
+.testimonial-track{
+  white-space:nowrap;
+  animation:scroll 30s linear infinite;
+}
+.testimonial-track span{
+  display:inline-block;
+  padding:15px 40px;
+  color:#1b5e20;
+  font-size:14px;
+}
+@keyframes scroll{
+  0%{transform:translateX(100%)}
+  100%{transform:translateX(-100%)}
+}
+
+/* Footer */
+.footer{
+  margin-top:40px;
+  text-align:center;
+  background:#e8f5e9;
+  padding:15px;
+  border-radius:8px;
+}
+</style>
+</head>
+
+<body>
+
+<div id="cart-count">Cart: 0</div>
+<a id="admin-link" href="admin.html">Admin</a>
+<a id="view-cart" href="cart.html">View Cart</a>
+
+<h1 class="wordart">MILNAPATH HERBAL PRODUCTS STORE</h1>
+<p style="text-align:center;color:#2e7d32;font-weight:bold">
+BM House, SHOP 107 Samuel Ladoke Akintola Boulevard, Garki, Abuja
+</p>
+
+<!-- Filters -->
+<div class="filters">
+<input id="searchInput" placeholder="Search products..." onkeyup="applyFilters()">
+<select id="categoryFilter" onchange="applyFilters()">
+<option value="all">All Categories</option>
+<option value="Drink">Drinks</option>
+<option value="Tea">Teas</option>
+<option value="Oil">Oils</option>
+<option value="General">General</option>
+</select>
+</div>
+
+<!-- Products -->
+<div class="products" id="products"></div>
+
+<!-- Testimonials BELOW products -->
+<div class="testimonial-wrapper">
+<div class="testimonial-track">
+<span>🌿 “Rejuvenating Drink boosted my energy naturally” – Jumoke</span>
+<span>🌿 “Glucomil helped stabilize my sugar levels” – Aisha</span>
+<span>🌿 “Detox Plus truly cleansed my system” – Chidi</span>
+<span>🌿 “Nakom Oil relieved my joint pains” – Fatima</span>
+</div>
+</div>
+
+<div class="footer">
+  Email:
+<a href="mailto:jumaiabdulsule@gmail.com">jumaiabdulsule@gmail.com</a>
+  |
+  Instagram:
+<a href="https://instagram.com/jumaiabdulsule">@jumaiabdulsule</a>
+</div>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let allProducts = [];
+
+function updateCartCount(){
+  document.getElementById("cart-count").innerText =
+"Cart: " + cart.reduce((s,i)=>s+i.qty,0);
+}
+
+async function loadProducts(){
+  const res = await fetch("/products");
+  const data = await res.json();
+
+  allProducts = data.map(p=>({
+    ...p,
+    category: p.category ? p.category : "General"
+  }));
+
+  localStorage.setItem("products",JSON.stringify(allProducts));
+  renderProducts(allProducts);
+}
+
+function renderProducts(list){
+  const box = document.getElementById("products");
+  box.innerHTML="";
+  list.forEach(p=>{
+    box.innerHTML += `
+<div class="card">
+<img src="${p.image}">
+<h3>${p.name}</h3>
+<p>${p.description}</p>
+<small>Category: ${p.category}</small>
+<div class="price">₦${p.price}</div>
+<button onclick="addToCart(${p.id})">Add to Cart</button>
+</div>
+    `;
+  });
+}
+
+function applyFilters(){
+  const text = searchInput.value.toLowerCase();
+  const cat = categoryFilter.value;
+
+  renderProducts(allProducts.filter(p=>{
+    return (
+      (p.name.toLowerCase().includes(text) ||
+       p.description.toLowerCase().includes(text))
+&&
+      (cat==="all" || p.category===cat)
+    );
+  }));
+}
+
+function addToCart(id){
+  const item = cart.find(i=>i.id===id);
+  if(item) item.qty++;
+  else cart.push({id,qty:1});
+  localStorage.setItem("cart",JSON.stringify(cart));
+  updateCartCount();
+}
+
+updateCartCount();
+loadProducts();
+</script>
+
+</body>
+</html>
