@@ -262,6 +262,48 @@ footer a {color:white;text-decoration:none;font-weight:bold}
   position: relative;
   z-index: 1;
 }
+/* Luxury Quantity Selector */
+.quantity-selector {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin:12px 0;
+  background:linear-gradient(135deg,#f0f7f1,#e8f5e9);
+  border:1px solid #c8e6c9;
+  border-radius:12px;
+  padding:6px;
+  box-shadow:0 4px 12px rgba(27,94,32,0.12);
+}
+.quantity-selector input {
+  width:60px;
+  text-align:center;
+  font-size:15px;
+  font-weight:bold;
+  padding:8px;
+  margin:0 8px;
+  border:1px solid #a5d6a7;
+  border-radius:8px;
+  background:#ffffff;
+  color:#1b5e20;
+  box-shadow:inset 0 2px 6px rgba(27,94,32,0.08);
+}
+.qty-btn {
+  background:linear-gradient(90deg,#2e7d32,#1b5e20);
+  color:#fff;
+  border:none;
+  padding:8px 14px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
+  font-size:16px;
+  box-shadow:0 4px 10px rgba(27,94,32,0.2);
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.qty-btn:hover {
+  transform:translateY(-2px) scale(1.05);
+  box-shadow:0 6px 14px rgba(27,94,32,0.25);
+}
+
 </style>
 
 </head>
@@ -328,73 +370,240 @@ footer a {color:white;text-decoration:none;font-weight:bold}
   <h2>✨ Premium Wellness Showcase</h2>
   <div class="glide-container">
     <div class="glide-track">
-     
-        <!-- Curated product cards -->
-    <div class="card">
-      <img src="images/healthcode_coffee.jpg" alt="Healthcode Coffee">
-      <h3>Healthcode Coffee</h3>
-      <span class="brand-badge">Healthcode</span>
-      <p>Herbal coffee enriched with Ginseng & Ganoderma, traditionally used to support memory and vitality.</p>
-      <div class="price">₦11,400</div>
-      <button>🛒 <span>Add to Cart</span></button>
-    </div>
 
-    <div class="card">
-      <img src="images/bennutrita.jpg" alt="BenNutrita Meal Replacement">
-      <h3>BenNutrita Meal Replacement</h3>
-      <span class="brand-badge">BenNutrita</span>
-      <p>Organic superfood blend with 24g protein and essential amino acids for complete nourishment.</p>
-      <div class="price ">₦7000 per role of 10</div>
-      <button>🛒 <span>Add to Cart</span></button>
-    </div>
+      <!-- Healthcode Coffee -->
+      <div class="card">
+        <img src="images/healthcode_coffee.jpg" alt="Healthcode Coffee">
+        <h3>Healthcode Coffee</h3>
+        <span class="brand-badge">Healthcode</span>
+        <p>Herbal coffee enriched with Ginseng & Ganoderma, traditionally used to support memory and vitality.</p>
+        <div class="price">₦11,400</div>
+        <div class="quantity-selector">
+          <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+          <input type="number" value="1" min="1">
+          <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+        </div>
+        <button onclick="addToCart(201,this)">🛒 <span>Add to Cart</span></button>
+      </div>
 
-    <div class="card">
-      <img src="images/blood_building_tea.jpg" alt="Blood Building Tea">
-      <h3>Blood Building Tea</h3>
-      <span class="brand-badge">Milnapath</span>
-      <p>Traditionally used to support healthy blood levels and natural body cleansing.</p>
-      <div class="price">₦15,000</div>
-      <button>🛒 <span>Add to Cart</span></button>
-    </div>
+      <!-- BenNutrita Meal Replacement -->
+      <div class="card">
+        <img src="images/bennutrita.jpg" alt="BenNutrita Meal Replacement">
+        <h3>BenNutrita Meal Replacement</h3>
+        <span class="brand-badge">BenNutrita</span>
+        <p>Organic superfood blend with 24g protein and essential amino acids for complete nourishment.</p>
+        <div class="price">₦7,000 per roll of 10</div>
+        <div class="quantity-selector">
+          <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+          <input type="number" value="1" min="1">
+          <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+        </div>
+        <button onclick="addToCart(202,this)">🛒 <span>Add to Cart</span></button>
+      </div>
 
-    <div class="card">
-      <img src="images/peptic_tea.jpg" alt="Peptic Tea">
-      <h3>Peptic Tea</h3>
-      <span class="brand-badge">Milnapath</span>
-      <p>Supports digestion, metabolism, and immune function for overall digestive wellness.</p>
-      <div class="price">₦15,000</div>
-      <button>🛒 <span>Add to Cart</span></button>
+      <!-- Blood Building Tea -->
+      <div class="card">
+        <img src="images/blood_building_tea.jpg" alt="Blood Building Tea">
+        <h3>Blood Building Tea</h3>
+        <span class="brand-badge">Milnapath</span>
+        <p>Traditionally used to support healthy blood levels and natural body cleansing.</p>
+        <div class="price">₦15,000</div>
+        <div class="quantity-selector">
+          <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+          <input type="number" value="1" min="1">
+          <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+        </div>
+        <button onclick="addToCart(203,this)">🛒 <span>Add to Cart</span></button>
+      </div>
+
+      <!-- Peptic Tea -->
+      <div class="card">
+        <img src="images/peptic_tea.jpg" alt="Peptic Tea">
+        <h3>Peptic Tea</h3>
+        <span class="brand-badge">Milnapath</span>
+        <p>Supports digestion, metabolism, and immune function for overall digestive wellness.</p>
+        <div class="price">₦15,000</div>
+        <div class="quantity-selector">
+          <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+          <input type="number" value="1" min="1">
+          <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+        </div>
+        <button onclick="addToCart(204,this)">🛒 <span>Add to Cart</span></button>
+      </div>
+
+      <!-- Healthcode Herbal Toothpaste -->
+      <div class="card">
+        <img src="images/healthcode_toothpaste.jpg" alt="Healthcode Herbal Toothpaste">
+        <h3>Healthcode Herbal Toothpaste</h3>
+        <span class="brand-badge">Healthcode</span>
+        <p>Premium herbal formula to clean teeth, freshen breath, and support gum health.</p>
+        <div class="price">₦6,600</div>
+        <div class="quantity-selector">
+          <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+          <input type="number" value="1" min="1">
+          <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+        </div>
+        <button onclick="addToCart(205,this)">🛒 <span>Add to Cart</span></button>
+      </div>
+
+      <!-- Nakom Oil -->
+      <div class="card">
+        <img src="images/nakom_oil.jpg" alt="Nakom Oil">
+        <h3>Nakom Oil</h3>
+        <span class="brand-badge">Milnapath</span>
+        <p>100% natural herbal oil for relief from inflammation, joint discomfort, allergies, and respiratory wellness.</p>
+        <div class="price">₦8,000</div>
+        <div class="quantity-selector">
+          <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+          <input type="number" value="1" min="1">
+          <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+        </div>
+        <button onclick="addToCart(206,this)">🛒 <span>Add to Cart</span></button>
+      </div>
+
+      <!-- Terahertz Wave Blower Wand -->
+      <div class="card">
+        <img src="images/healthcode_blower.jpg" alt="Terahertz Wave Blower Wand">
+        <h3>Terahertz Wave Blower Wand</h3>
+        <span class="brand-badge">Healthcode</span>
+        <p>Innovative wellness device to ease pain, soothe joints, and support mobility.</p>
+        <div class="price">₦18,000</div>
+        <div class="quantity-selector">
+          <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+          <input type="number" value="1" min="1">
+          <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+        </div>
+        <button onclick="addToCart(207,this)">🛒 <span>Add to Cart</span></button>
+      </div>
+
+      <!-- Gynomil -->
+      <div class="card">
+        <img src="images/gynomil.jpg" alt="Gynomil">
+        <h3>Gynomil</h3>
+        <span class="brand-badge">Milnapath</span>
+        <p>Traditionally used to support women’s reproductive health and hormonal balance.</p>
+        <div class="price">₦12,000</div>
+        <div class="quantity-selector">
+          <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+          <input type="number" value="1" min="1">
+          <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+        </div>
+        <button onclick="addToCart(208,this)">🛒 <span>Add to Cart</span></button>
+      </div>
+
+      <!-- Glucomil -->
+      <div class="card">
+        <img src="images/glucomil.jpg" alt="Glucomil">
+        <h3>Glucomil</h3>
+        <span class="brand-badge">Milnapath</span>
+        <p>Helps stabilize blood sugar levels naturally.</p>
+        <div class="price">₦14,000</div>
+        <div class="quantity-selector">
+          <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+          <input type="number" value="1" min="1">
+          <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+        </div>
+        <button onclick="addToCart(209,this)">🛒 <span>Add to Cart</span></button>
+      </div>
+
+      <!-- Detox Plus -->
+      <div class="card">
+        <img src="images/detox_plus.jpg" alt="Detox Plus">
+        <h3>Detox Plus</h3>
+        <span class="brand-badge">Milnapath</span>
+        <p>Supports natural cleansing and boosts immunity.</p>
+        <div class="price">₦15,000</div>
+        <div class="quantity-selector">
+          <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+          <input type="number" value="1" min="1">
+          <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+        </div>
+        <button onclick="addToCart(210,this)">🛒 <span>Add to Cart</span></button>
+      </div>
+
+            <!-- D-Man -->
+      <div class="card">
+        <img src="images/dman.jpg" alt="D-Man">
+        <h3>D-Man</h3>
+        <span class="brand-badge">Milnapath</span>
+        <p>Men’s health supplement traditionally used to support vitality and stamina.</p>
+        <div class="price">₦16,000</div>
+        <div class="quantity-selector">
+          <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+          <input type="number" value="1" min="1">
+          <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+        </div>
+        <button onclick="addToCart(211,this)">🛒 <span>Add to Cart</span></button>
+      </div>
+
+      <!-- Kardiamil -->
+      <div class="card">
+        <img src="images/kardiamil.jpg" alt="Kardiamil">
+        <h3>Kardiamil</h3>
+        <span class="brand-badge">Milnapath</span>
+        <p>Traditionally used to support cardiovascular health and circulation.</p>
+        <div class="price">₦17,500</div>
+        <div class="quantity-selector">
+          <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+          <input type="number" value="1" min="1">
+          <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+        </div>
+        <button onclick="addToCart(212,this)">🛒 <span>Add to Cart</span></button>
+      </div>
+
+      <!-- HaemoCare -->
+      <div class="card">
+        <img src="images/haemocare.jpg" alt="HaemoCare">
+        <h3>HaemoCare</h3>
+        <span class="brand-badge">Milnapath</span>
+        <p>Supports healthy haemoglobin levels and blood vitality.</p>
+        <div class="price">₦13,000</div>
+        <div class="quantity-selector">
+          <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+          <input type="number" value="1" min="1">
+          <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+        </div>
+        <button onclick="addToCart(213,this)">🛒 <span>Add to Cart</span></button>
+      </div>
+
+      <!-- Ulcer Screening Tea -->
+      <div class="card">
+        <img src="images/ulcer_tea.jpg" alt="Ulcer Screening Tea">
+        <h3>Ulcer Screening Tea</h3>
+        <span class="brand-badge">Milnapath</span>
+        <p>Traditionally used to soothe the stomach and support ulcer management.</p>
+        <div class="price">₦14,500</div>
+        <div class="quantity-selector">
+          <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+          <input type="number" value="1" min="1">
+          <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+        </div>
+        <button onclick="addToCart(214,this)">🛒 <span>Add to Cart</span></button>
+      </div>
+
+      <!-- Herbal Skin Cream -->
+      <div class="card">
+        <img src="images/skin_cream.jpg" alt="Herbal Skin Cream">
+        <h3>Herbal Skin Cream</h3>
+        <span class="brand-badge">Milnapath</span>
+        <p>Nourishes and protects skin with natural herbal extracts.</p>
+        <div class="price">₦9,500</div>
+        <div class="quantity-selector">
+          <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+          <input type="number" value="1" min="1">
+          <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+        </div>
+        <button onclick="addToCart(215,this)">🛒 <span>Add to Cart</span></button>
+      </div>
+
     </div>
-<div class="card">
-      <img src="images/healthcode_toothpaste.jpg" alt="Healthcode Herbal Toothpaste">
-      <h3>Healthcode Herbal Toothpaste</h3>
-      <span class="brand-badge">Healthcode</span>
-      <p>A premium White Teeth herbal formula designed to gently clean teeth, freshen breath, and support gum health. Traditionally used to help reduce bleeding, prevent cavities, and protect against bacteria, while providing long-lasting freshness and promoting overall oral wellness.</p>
-      <div class="price">₦6,600</div>
-      <button>🛒 <span>Add to Cart</span></button>
-    </div>
-    <div class="card">
-      <img src="images/nakom_oil.jpg" alt="Nakom Oil">
-      <h3>Nakom Oil</h3>
-      <span class="brand-badge">Milnapath</span>
-      <p>A 100% natural herbal oil traditionally used to support relief from inflammation, joint discomfort, allergies, and respiratory wellness.</p>
-      <div class="price">₦8000</div>
-      <button>🛒 <span>Add to Cart</span></button>
-    </div>
-     <div class="card">
-      <img src="images/healthcode_blower.jpg" alt="Terahertz Wave Blower Wand">
-      <h3>Terahertz Wave Blower Wand</h3>
-      <span class="brand-badge">Healthcode</span>
-      <p>An innovative wellness device designed to support comfort and mobility. Traditionally used to help ease pain, soothe joints, and provide relief for conditions such as knee arthritis, sports sprains, shoulder stiffness, cervical tension, and rheumatoid discomfort.</p>
-      <div class="price">₦18,000</div>
-      <button>🛒 <span>Add to Cart</span></button>
-    </div>
-    <!-- Add more curated cards for Gynomil, Glucomil, Detox Plus, D-Man, Kardiamil, Toothpaste, Blower Wand -->
   </div>
+  <div class="scrollbar">
+    <div class="scroll-thumb"></div>
   </div>
-   <div class="scrollbar">
-     <div class="scroll-thumb"></div> </div>
 </section>
+
+
 <!-- Footer -->
 <footer>
   <p>
@@ -414,16 +623,14 @@ footer a {color:white;text-decoration:none;font-weight:bold}
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let allProducts = [];
 
+// ✅ Always use the cart's own stored price/name for totals
 function updateCartCount(){
-  const products = JSON.parse(localStorage.getItem("products")||"[]");
-  const count = cart.reduce((s,i)=>s+i.qty,0);
-  const value = cart.reduce((s,i)=>{
-    const p = products.find(pp=>pp.id===i.id);
-    return s + (p ? p.price * i.qty : 0);
-  },0);
+  const count = cart.reduce((s,i)=>s + i.qty, 0);
+  const value = cart.reduce((s,i)=> s + (i.price * i.qty), 0);
   document.getElementById("cart-count").innerText = `Cart: ${count} | ₦${value}`;
 }
 
+// Load products.json for main grid
 async function loadProducts(){
   const res = await fetch('products.json');
   const data = await res.json();
@@ -432,6 +639,7 @@ async function loadProducts(){
   renderProducts(allProducts);
 }
 
+// Render cards with quantity selector (main grid)
 function renderProducts(list){
   const box=document.getElementById("products");
   box.innerHTML="";
@@ -439,11 +647,16 @@ function renderProducts(list){
     box.innerHTML+=`<div class="card">
       <img src="${p.image}" alt="${p.name}">
       <h3>${p.name}</h3>
-      <span class="brand-badge">${p.brand}</span>
+      <span class="brand-badge">${p.brand||''}</span>
       <p>${p.description}</p>
       <small>Category: ${p.category}</small>
       <div class="price">₦${p.price}</div>
-      <button onclick="addToCart(${p.id})">🛒 <span>Add to Cart</span></button>
+      <div class="quantity-selector">
+        <button class="qty-btn" onclick="changeQty(this,-1)">−</button>
+        <input type="number" value="1" min="1">
+        <button class="qty-btn" onclick="changeQty(this,1)">+</button>
+      </div>
+      <button onclick="addToCart(${p.id}, this)">🛒 <span>Add to Cart</span></button>
     </div>`;
   });
 }
@@ -457,18 +670,43 @@ function applyFilters(){
   ));
 }
 
-function addToCart(id){
-  const item=cart.find(i=>i.id===id);
-  if(item)item.qty++;
-  else cart.push({id,qty:1});
-  localStorage.setItem("cart",JSON.stringify(cart));
+function changeQty(button, delta){
+  const input = button.parentElement.querySelector("input");
+  let value = parseInt(input.value) || 1;
+  value = Math.max(1, value + delta);
+  input.value = value;
+}
+
+// ✅ Robust addToCart with proper price parsing
+function addToCart(id, btn){
+  const card = btn.closest(".card");
+  const qty = parseInt(card.querySelector(".quantity-selector input").value) || 1;
+
+  // Read name and price from DOM
+  const name = card.querySelector("h3")?.innerText || `Product ${id}`;
+  const priceText = card.querySelector(".price")?.innerText || "₦0";
+
+  // Clean price string: remove ₦, commas, and take first number
+  let clean = priceText.replace(/[₦,]/g,"").trim();
+  clean = clean.split(" ")[0]; // handle cases like "7000 per roll of 10"
+  const price = Number(clean) || 0;
+
+  const existing = cart.find(i=>i.id===id);
+  if(existing){
+    existing.qty += qty;
+  } else {
+    cart.push({ id, name, price, qty });
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
   updateCartCount();
 }
 
+// Init
 updateCartCount();
 loadProducts();
 
-// Consultation form -> WhatsApp + localStorage
+/* Consultation form logic remains unchanged */
 document.getElementById("consultationForm").addEventListener("submit", function(e){
   e.preventDefault();
   const name = document.getElementById("cName").value.trim();
@@ -477,7 +715,7 @@ document.getElementById("consultationForm").addEventListener("submit", function(
   const service = document.getElementById("cService").value;
   const date = document.getElementById("cDate").value;
 
-   let message =
+  let message =
 `🌿 *MILNAPATH HERBAL PRODUCTS STORE*\n━━━━━━━━━━━━━━━━━━\n` +
 `📅 Appointment Date: ${date}\n` +
 `👤 Name: ${name}\n📞 Phone: ${phone}\n` +
@@ -501,6 +739,7 @@ document.getElementById("consultationForm").addEventListener("submit", function(
   alert("Your consultation request has been sent via WhatsApp and saved for admin review.");
   this.reset();
 });
+
 // Premium Showcase sliding bar + snapping
 const glideContainer = document.querySelector('.glide-container');
 const scrollbar = document.querySelector('.scrollbar');
