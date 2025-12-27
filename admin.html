@@ -3,181 +3,178 @@
 <head>
 <meta charset="UTF-8">
 <title>Admin Panel - MILNAPATH HERBAL PRODUCTS STORE</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 <style>
-body{
-  font-family:Arial, sans-serif;
-  background:#f0f7f1;
-  padding:20px;
-}
-h1{
-  text-align:center;
-  color:#2e7d32;
-  margin-bottom:30px;
-}
-section{
-  margin-bottom:40px;
-}
-table{
-  width:100%;
-  border-collapse:collapse;
-  background:#fff;
-  border-radius:8px;
-  overflow:hidden;
-  box-shadow:0 2px 8px rgba(0,0,0,0.1);
-}
-th,td{
-  padding:10px;
-  border-bottom:1px solid #ddd;
-  text-align:left;
-}
-th{
-  background:#2e7d32;
-  color:#fff;
-}
-tr:hover{
-  background:#e0f2f1;
-}
-h2{
-  color:#1b5e20;
-  margin-bottom:10px;
-}
-.status{
-  font-weight:bold;
-}
-.yes{color:green;}
-.no{color:red;}
-.top-actions{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:20px;
-}
-button{
-  padding:8px 12px;
-  border:none;
-  border-radius:5px;
-  cursor:pointer;
-}
-.clear-btn{
-  background:#b71c1c;
-  color:white;
-}
-.back-btn{
-  background:#1b5e20;
-  color:white;
-  text-decoration:none;
-  padding:8px 12px;
-  border-radius:5px;
-}
-small{
-  color:#555;
-}
+:root{--green-dark:#1b5e20;--green-main:#2e7d32;--green-light:#a5d6a7}
+body{font-family:'Inter',Arial,sans-serif;background:linear-gradient(135deg,#f0f7f1,#e8f3ea);color:#17351c;padding:20px}
+#pin-section{max-width:420px;margin:80px auto;text-align:center;background:#fff;border-radius:12px;padding:28px;box-shadow:0 10px 30px rgba(27,94,32,0.15);border:1px solid rgba(46,125,50,0.15)}
+#pin-section h2{font-family:'Marcellus',serif;color:var(--green-main);margin-bottom:14px;animation:fadeInUp 1s ease forwards}
+#pin-input{padding:12px;width:70%;border-radius:8px;border:1px solid #c8e6c9;background:#fcfffd}
+#pin-btn{padding:12px 16px;margin-left:8px;border:none;border-radius:8px;background:linear-gradient(90deg,#2e7d32,#1b5e20);color:#fff;font-weight:bold;cursor:pointer;transition:.3s}
+#pin-btn:hover{transform:translateY(-2px) scale(1.03)}
+#pin-msg{margin-top:12px;color:#b71c1c;font-weight:600}
+#admin-content{display:none;max-width:1100px;margin:0 auto}
+h1{text-align:center;font-family:'Marcellus',serif;color:var(--green-main);margin-bottom:20px;animation:fadeInUp 1s ease forwards}
+.top-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;margin-bottom:18px}
+a.back-btn{background:#e8f3ea;color:var(--green-dark);text-decoration:none;padding:10px 16px;border-radius:8px;border:1px solid #c8e6c9;font-weight:600;transition:.3s}
+a.back-btn:hover{transform:translateY(-2px)}
+button.action{padding:10px 16px;border:none;border-radius:8px;cursor:pointer;font-weight:700;transition:.3s}
+button.action:hover{transform:translateY(-2px) scale(1.03)}
+.clear-btn{background:#b71c1c;color:#fff}
+.download-btn{background:linear-gradient(90deg,#2e7d32,#1b5e20);color:#fff}
+.print-btn{background:linear-gradient(90deg,#4caf50,#2e7d32);color:#fff}
+.table-wrap{background:#fff;border:1px solid #c8e6c9;border-radius:12px;overflow:hidden;box-shadow:0 8px 24px rgba(27,94,32,0.12)}
+table{width:100%;border-collapse:collapse}
+th,td{padding:12px;border-bottom:1px solid #e6f2e7;text-align:left;vertical-align:top}
+th{background:#f5fbf6;color:#1b5e20;font-family:'Marcellus',serif}
+tr:hover{background:#f9fdf9}
+small{color:#4b7053}
+footer{text-align:center;background:#2e7d32;color:#fff;padding:24px;border-radius:12px;margin-top:34px}
+footer a{color:#fff;text-decoration:none;font-weight:700}
+.whatsapp-float{position:fixed;bottom:80px;right:20px;background:#25D366;color:#fff;padding:12px 18px;border-radius:30px;font-weight:bold;box-shadow:0 0 15px rgba(0,0,0,.3);transition:transform .3s ease;z-index:999;animation:pulse 2.5s infinite}
+.whatsapp-float:hover{transform:scale(1.05)}
+.section-title{color:#1b5e20;font-family:'Marcellus',serif;margin:6px 0 12px}
+@keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
-
 <body>
 
-<h1>Admin Panel – MILNAPATH HERBAL PRODUCTS STORE</h1>
-
-<div class="top-actions">
-<a href="../index.html" class="back-btn">⬅ Back to Store</a>
-<button class="clear-btn" onclick="clearOrders()">Clear All Orders</button>
+<div id="pin-section">
+  <h2>Enter Admin PIN</h2>
+  <input type="password" id="pin-input" placeholder="Enter PIN">
+  <button id="pin-btn">Submit</button>
+  <p id="pin-msg"></p>
 </div>
 
-<!-- ORDERS -->
-<section>
-<h2>Customer Orders</h2>
-<table id="orders-table">
-<thead>
-<tr>
-<th>Date</th>
-<th>Items Ordered</th>
-<th>Total (₦)</th>
-<th>Shipment</th>
-<th>Proof of Payment</th>
-</tr>
-</thead>
-<tbody></tbody>
-</table>
-<p><small>Orders are saved locally (offline mode).</small></p>
-</section>
+<div id="admin-content">
+  <h1>Admin Panel – MILNAPATH HERBAL PRODUCTS STORE</h1>
 
-<!-- BOOKINGS -->
-<section>
-<h2>Booking / Test Requests</h2>
-<table id="bookings-table">
-<thead>
-<tr>
-<th>Date</th>
-<th>Name</th>
-<th>Email</th>
-<th>Phone</th>
-<th>Requested Test</th>
-<th>Notes</th>
-</tr>
-</thead>
-<tbody></tbody>
-</table>
-</section>
+  <div class="top-actions">
+    <a href="index.html" class="back-btn">⬅ Back to Store</a>
+    <div style="display:flex;gap:8px">
+      <button class="action clear-btn" onclick="clearOrders()">Clear All Orders</button>
+      <button class="action download-btn" onclick="downloadOrders()">⬇ Download Orders</button>
+      <button class="action print-btn" onclick="printOrders()">🖨 Print Orders</button>
+    </div>
+  </div>
+
+  <section>
+    <h2 class="section-title">Customer Orders</h2>
+    <div class="table-wrap">
+      <table id="orders-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Customer</th>
+            <th>Items Ordered</th>
+            <th>Total (₦)</th>
+            <th>Shipment</th>
+            <th>Proof</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p><small>Orders are stored locally for quick offline review.</small></p>
+  </section>
+
+  <div class="top-actions" style="margin-top:22px">
+    <div style="display:flex;gap:8px">
+      <button class="action clear-btn" onclick="clearConsultations()">Clear Consultations</button>
+      <button class="action download-btn" onclick="downloadConsultations()">⬇ Download Consultations</button>
+      <button class="action print-btn" onclick="printConsultations()">🖨 Print Consultations</button>
+    </div>
+  </div>
+
+  <section>
+    <h2 class="section-title">Consultation Requests</h2>
+    <div class="table-wrap">
+      <table id="consultations-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Service</th>
+            <th>Preferred Date</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p><small>Consultations are stored locally for quick offline review.</small></p>
+  </section>
+</div>
+
+<footer>
+  <p>
+    <strong>Payment:</strong> Jumai Abdul-Sule — 8242971170 — Moniepoint<br>
+    <strong>Location:</strong> 21 C Crescent off B Avenue, Citec Estate, Airport Road, Jabi, Abuja FCT<br>
+    <strong>Contact:</strong> WhatsApp +2347039249771 | Email: jumaiabdulsule@gmail.com
+  </p>
+  <p style="margin-top:12px;">
+    Curated by <strong>RoyalTechSolutions</strong><br>
+    <a href="https://royaltechsolutions.netlify.app" target="_blank">Explore Portfolio</a>
+  </p>
+</footer>
+
+<a href="https://wa.me/2347039249771" class="whatsapp-float" target="_blank">💬 Chat on WhatsApp</a>
 
 <script>
+const ADMIN_PIN = "202526";
+
+document.getElementById("pin-btn").addEventListener("click", ()=>{
+  const pin = document.getElementById("pin-input").value;
+  if(pin === ADMIN_PIN){
+    document.getElementById("pin-section").style.display = "none";
+    document.getElementById("admin-content").style.display = "block";
+    loadOrders();
+    loadConsultations();
+  } else {
+    document.getElementById("pin-msg").innerText = "Access Denied. Wrong PIN!";
+  }
+});
+
 function loadOrders(){
   const orders = JSON.parse(localStorage.getItem("orders") || "[]");
   const products = JSON.parse(localStorage.getItem("products") || "[]");
   const tbody = document.querySelector("#orders-table tbody");
   tbody.innerHTML = "";
 
-  if(orders.length === 0){
-    tbody.innerHTML = "<tr><td colspan='5'>No orders yet.</td></tr>";
+    if(orders.length === 0){
+    tbody.innerHTML = "<tr><td colspan='6' style='text-align:center;color:#4b7053;'>🛒 No orders yet.</td></tr>";
     return;
   }
 
   orders.forEach(order=>{
-    let itemsText = "";
-    let total = 0;
-
-    order.items.forEach(it=>{
+    let itemsText = "", total = 0;
+    (order.items || []).forEach((it, index)=>{
       const product = products.find(p=>p.id === it.id);
       if(product){
         const subtotal = product.price * it.qty;
         total += subtotal;
-        itemsText += `${product.name} × ${it.qty} = ₦${subtotal}<br>`;
+        itemsText += `${index+1}) ${it.qty} × ${product.name} (₦${product.price.toLocaleString()} each) → ₦${subtotal.toLocaleString()}<br>`;
       }
     });
 
     const tr = document.createElement("tr");
     tr.innerHTML = `
-<td>${order.date}</td>
-<td>${itemsText}</td>
-<td>₦${total}</td>
-<td>${order.shipment}</td>
-<td class="status ${order.proofUploaded?'yes':'no'}">
-        ${order.proofUploaded ? "Uploaded" : "Not Uploaded"}
-</td>
-    `;
-    tbody.appendChild(tr);
-  });
-}
-
-function loadBookings(){
-  const bookings = JSON.parse(localStorage.getItem("bookingRequests") || "[]");
-  const tbody = document.querySelector("#bookings-table tbody");
-  tbody.innerHTML = "";
-
-  if(bookings.length === 0){
-    tbody.innerHTML = "<tr><td colspan='6'>No booking requests yet.</td></tr>";
-    return;
-  }
-
-  bookings.forEach(book=>{
-    const tr = document.createElement("tr");
-    tr.innerHTML = `
-<td>${book.date}</td>
-<td>${book.name}</td>
-<td>${book.email}</td>
-<td>${book.phone}</td>
-<td>${book.test}</td>
-<td>${book.notes || "-"}</td>
+      <td>${order.date || ""}</td>
+      <td>${order.customer || "N/A"}</td>
+      <td>
+        <div style="line-height:1.6;">
+          🧾 <strong>Order Summary</strong><br>
+          ${itemsText || "—"}
+          <hr style="border:0;border-top:1px solid #e6f2e7;margin:6px 0;">
+          💰 <strong>Total:</strong> ₦${total.toLocaleString()}
+        </div>
+      </td>
+      <td>₦${total.toLocaleString()}</td>
+      <td>${order.shipment || "N/A"}</td>
+      <td>${order.proofUploaded ? "✅" : "❌"}</td>
     `;
     tbody.appendChild(tr);
   });
@@ -190,8 +187,155 @@ function clearOrders(){
   }
 }
 
-loadOrders();
-loadBookings();
+function downloadOrders(){
+  const orders = JSON.parse(localStorage.getItem("orders") || "[]");
+  const products = JSON.parse(localStorage.getItem("products") || "[]");
+
+  if(orders.length === 0){
+    alert("No orders to download.");
+    return;
+  }
+
+  let csv = "Date,Customer,Items Ordered,Total,Shipment,Proof Uploaded\n";
+
+  orders.forEach(order=>{
+    let itemsText = "", total = 0;
+    (order.items || []).forEach(it=>{
+      const product = products.find(p=>p.id === it.id);
+      if(product){
+        const subtotal = product.price * it.qty;
+        total += subtotal;
+        itemsText += `${it.qty} × ${product.name} (₦${product.price.toLocaleString()} each) → ₦${subtotal.toLocaleString()}; `;
+      }
+    });
+    csv += `"${order.date || ""}","${order.customer || "N/A"}","${itemsText.trim()}","₦${total.toLocaleString()}","${order.shipment || "N/A"}","${order.proofUploaded ? "Yes" : "No"}"\n`;
+  });
+
+  csv += `\n"🚚 Note: Delivery charges may apply depending on customer location."\n`;
+
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "orders.csv";
+  link.click();
+}
+
+function printOrders(){
+  const ordersTable = document.getElementById("orders-table").outerHTML;
+  const win = window.open("", "", "width=900,height=600");
+  win.document.write(`
+    <html>
+    <head>
+      <title>Orders - MILNAPATH HERBAL PRODUCTS STORE</title>
+      <style>
+        body { font-family: Inter, Arial, sans-serif; padding: 20px; background:#ffffff; }
+        h2 { font-family: Marcellus, serif; color: #2e7d32; margin:0 }
+        table { width:100%; border-collapse:collapse; margin-top:16px; }
+        th, td { border:1px solid #ddd; padding:8px; text-align:left; vertical-align:top; }
+        th { background:#f7fbf8; color:#1b5e20; }
+        .note { margin-top:16px; font-size:13px; color:#b71c1c; }
+      </style>
+    </head>
+    <body>
+      <h2>Orders – MILNAPATH HERBAL PRODUCTS STORE</h2>
+      ${ordersTable}
+      <p class="note">🚚 Note: Delivery charges may apply depending on customer location.</p>
+      <p style="margin-top:20px;font-size:14px;color:#17351c;">
+        Payment: Jumai Abdul Sule — 3093352436 — First Bank<br>
+        Location: 21 C Crescent off B Avenue, Citec Estate, Airport Road, Jabi, Abuja FCT<br>
+        Contact: WhatsApp +2347039249771 | Email: jumaiabdulsule@gmail.com<br>
+        Curated by <strong>RoyalTechSolutions</strong> — 
+        <a href="https://royaltechsolutions.netlify.app" target="_blank">royaltechsolutions.netlify.app</a>
+      </p>
+    </body>
+    </html>
+  `);
+  win.document.close();
+  win.print();
+}
+
+function loadConsultations(){
+  const consultations = JSON.parse(localStorage.getItem("consultations")||"[]");
+  const tbody = document.querySelector("#consultations-table tbody");
+  tbody.innerHTML = "";
+
+  if(consultations.length===0){
+    tbody.innerHTML = "<tr><td colspan='6' style='text-align:center;color:#4b7053;'>📋 No consultation requests yet.</td></tr>";
+    return;
+  }
+
+  consultations.forEach(c=>{
+    const tr=document.createElement("tr");
+    tr.innerHTML=`
+      <td>${c.created}</td>
+      <td>${c.name}</td>
+      <td>${c.phone}</td>
+      <td>${c.email||"—"}</td>
+      <td>${c.service}</td>
+      <td>${c.date}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+function clearConsultations(){
+  if(confirm("Are you sure you want to clear ALL consultation requests?")){
+    localStorage.removeItem("consultations");
+    loadConsultations();
+  }
+}
+
+function downloadConsultations(){
+  const consultations=JSON.parse(localStorage.getItem("consultations")||"[]");
+  if(consultations.length===0){alert("No consultations to download.");return;}
+
+  let csv="Date,Name,Phone,Email,Service,Preferred Date\n";
+  consultations.forEach(c=>{
+    csv+=`"${c.created}","${c.name}","${c.phone}","${c.email||""}","${c.service}","${c.date}"\n`;
+  });
+
+  csv+=`\n"🚚 Note: Delivery charges may apply depending on customer location."\n`;
+
+  const blob=new Blob([csv],{type:"text/csv;charset=utf-8;"});
+  const link=document.createElement("a");
+  link.href=URL.createObjectURL(blob);
+  link.download="consultations.csv";
+  link.click();
+}
+
+function printConsultations(){
+  const consultationsTable=document.getElementById("consultations-table").outerHTML;
+  const win=window.open("","","width=900,height=600");
+  win.document.write(`
+    <html>
+    <head>
+      <title>Consultations - MILNAPATH HERBAL PRODUCTS STORE</title>
+      <style>
+        body { font-family: Inter, Arial, sans-serif; padding: 20px; background:#ffffff; }
+        h2 { font-family: Marcellus, serif; color: #2e7d32; margin:0 }
+        table { width:100%; border-collapse:collapse; margin-top:16px; }
+        th, td { border:1px solid #ddd; padding:8px; text-align:left; vertical-align:top; }
+        th { background:#f7fbf8; color:#1b5e20; }
+        .note { margin-top:16px; font-size:13px; color:#b71c1c; }
+      </style>
+    </head>
+    <body>
+      <h2>Consultation Requests – MILNAPATH HERBAL PRODUCTS STORE</h2>
+      ${consultationsTable}
+      <p class="note">🚚 Note: Delivery charges may apply depending on customer location.</p>
+      <p style="margin-top:20px;font-size:14px;color:#17351c;">
+        Payment: Jumai Abdul-Sule — 8242971170 — Moniepoint<br>
+        Location: 21 C Crescent off B Avenue, Citec Estate, Airport Road, Jabi, Abuja FCT<br>
+        Contact: WhatsApp +2347039249771 | Email: jumaiabdulsule@gmail.com<br>
+        Curated by <strong>RoyalTechSolutions</strong> — 
+        <a href="https://royaltechsolutions.netlify.app" target="_blank">royaltechsolutions.netlify.app</a>
+      </p>
+    </body>
+    </html>
+  `);
+  win.document.close();
+  win.print();
+}
 </script>
 
 </body>

@@ -3,232 +3,463 @@
 <head>
 <meta charset="UTF-8">
 <title>MILNAPATH HERBAL PRODUCTS STORE</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-body{
-  font-family:Arial,sans-serif;
+:root {
+  --green-dark:#1b5e20;
+  --green-main:#2e7d32;
+  --green-light:#a5d6a7;
+  --paper:#f7fbf8;
+}
+body {
+  font-family:'Inter',Arial,sans-serif;
   background:#f0f7f1;
   margin:0;
   padding:20px;
+  color:#17351c;
 }
-
-/* WordArt Header */
-h1.wordart{
+header {
   text-align:center;
+  margin-bottom:20px;
+}
+header h1 {
   font-size:48px;
   font-weight:900;
   background:linear-gradient(90deg,#2e7d32,#a5d6a7,#1b5e20);
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
   text-shadow:2px 2px 4px rgba(0,0,0,.3);
+  font-family:'Marcellus',serif;
+  animation:fadeInUp 1s ease forwards;
 }
-
-/* Fixed UI */
-#cart-count{
-  position:fixed;
-  top:15px;
-  right:20px;
-  background:#2e7d32;
-  color:#fff;
-  padding:8px 12px;
-  border-radius:20px;
-}
-a{
-  text-decoration:none;
+header p {
+  color:#1b5e20;
   font-weight:bold;
+  text-shadow:1px 1px 2px rgba(0,0,0,0.2);
 }
-#admin-link{
-  position:fixed;
-  top:55px;
-  right:20px;
-  background:#1b5e20;
+#cart-count {
+  position:fixed;top:15px;right:20px;
+  background:#2e7d32;color:#fff;padding:8px 12px;
+  border-radius:20px;z-index:100;font-weight:700;
+}
+#admin-link {
+  position:fixed;top:55px;right:20px;
+  background:#1b5e20;color:#fff;padding:6px 10px;
+  border-radius:5px;z-index:100;text-decoration:none;font-weight:700;
+}
+#view-cart {
+  position:fixed;top:95px;right:20px;
+  color:#2e7d32;font-weight:bold;text-decoration:underline;
+  cursor:pointer;z-index:100;
+}
+.filters {
+  max-width:700px;margin:20px auto;display:flex;gap:10px;
+}
+.filters input,.filters select {
+  flex:1;padding:12px;border-radius:10px;
+  border:1px solid #c8e6c9;background:#fcfffd;
+}
+.products {
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;
+}
+.card {
+  background:#fff;padding:15px;border-radius:12px;
+  box-shadow:0 8px 22px rgba(27,94,32,0.08);
+  border:1px solid #c8e6c9;
+  transition:transform .3s ease, box-shadow .3s ease;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.card:hover {
+  transform:translateY(-5px);
+  box-shadow:0 12px 28px rgba(27,94,32,0.18);
+}
+.card img {width:100%;height:180px;object-fit:contain}
+.card h3 {margin:8px 0;color:#1b5e20;font-family:'Marcellus',serif}
+/* ✅ Show full product descriptions */
+.card p {
+  color:#385a40;
+  font-size:13px;
+  line-height:1.4;
+  margin:6px 0;
+}
+.brand-badge {
+  display:inline-block;
+  background:var(--green-main);
   color:#fff;
-  padding:6px 10px;
-  border-radius:5px;
+  font-size:11px;
+  font-weight:600;
+  padding:4px 8px;
+  border-radius:6px;
+  margin-bottom:8px;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
 }
-#view-cart{
-  position:fixed;
-  top:95px;
-  right:20px;
-  color:#2e7d32;
+.price {color:#2e7d32;font-weight:bold;margin:6px 0}
+button {
+  width:100%;padding:12px;border:none;
+  background:linear-gradient(90deg,#2e7d32,#1b5e20);
+  color:#fff;border-radius:10px;cursor:pointer;font-weight:700;
+  box-shadow:0 6px 18px rgba(27,94,32,0.15);
+  transition:transform .3s ease, box-shadow .3s ease;
+  display:flex;align-items:center;justify-content:center;
 }
+button span {margin-left:6px;}
+button:hover {
+  transform:translateY(-2px) scale(1.03);
+  box-shadow:0 8px 20px rgba(27,94,32,0.25);
+}
+.testimonial-wrapper {
+  margin:40px 0;background:#e0f2f1;overflow:hidden;border-radius:8px;
+}
+.testimonial-track {
+  white-space:nowrap;animation:scroll 30s linear infinite;
+}
+.testimonial-track span {
+  display:inline-block;padding:15px 40px;color:#1b5e20;font-size:14px;
+}
+@keyframes scroll {0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+.section-card {
+  max-width:700px;margin:50px auto;background:#ffffff;padding:30px;
+  border-radius:12px;box-shadow:0 8px 24px rgba(27,94,32,0.12);
+  border:1px solid #c8e6c9;
+}
+.section-card h2 {
+  color:#2e7d32;font-family:'Marcellus',serif;text-align:center;
+  margin-bottom:14px;animation:fadeInUp 1s ease forwards;
+}
+.section-card p {color:#4b7053;text-align:center}
+.form-grid {display:grid;gap:16px;margin-top:12px}
+.form-grid input,.form-grid select {
+  padding:12px;border-radius:10px;border:1px solid #c8e6c9;
+  background:#fcfffd;width:100%;
+}
+.form-grid button {
+  padding:14px;background:linear-gradient(90deg,#2e7d32,#1b5e20);
+  color:#fff;border:none;border-radius:12px;font-weight:bold;
+  cursor:pointer;box-shadow:0 6px 18px rgba(27,94,32,0.25);
+  transition:transform .3s ease;
+}
+.form-grid button:hover {transform:translateY(-2px) scale(1.03)}
+.notice {color:#b71c1c;font-size:13px;margin-top:8px;text-align:center}
+@keyframes fadeInUp {from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+footer {
+  margin-top:40px;text-align:center;background:#2e7d32;
+  padding:24px;border-radius:12px;color:white;
+}
+footer a {color:white;text-decoration:none;font-weight:bold}
+.footer-note {margin-top:12px}
+.whatsapp-float {
+  position:fixed;bottom:80px;right:20px;background:#25D366;color:#fff;
+  padding:12px 18px;border-radius:30px;font-weight:bold;
+  box-shadow:0 0 15px rgba(0,0,0,.3);transition:transform .3s ease;
+  z-index:999;animation:pulse 2.5s infinite;
+}
+.whatsapp-float:hover {transform:scale(1.05)}
+@keyframes pulse {0%{transform:scale(1)}50%{transform:scale(1.05)}100%{transform:scale(1)}}
 
-/* Filters */
-.filters{
-  max-width:600px;
-  margin:20px auto;
-  display:flex;
-  gap:10px;
+/* Premium Showcase auto-glide with pause on hover */
+.glide-showcase {
+  margin:40px 0;
+  overflow:hidden;
 }
-.filters input,.filters select{
-  flex:1;
-  padding:8px;
-  border-radius:5px;
-  border:1px solid #ccc;
-}
-
-/* Products */
-.products{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-  gap:20px;
-}
-.card{
-  background:#fff;
-  padding:15px;
-  border-radius:10px;
-  box-shadow:0 2px 8px rgba(0,0,0,.1);
-}
-.card img{
+.glide-container {
   width:100%;
-  height:180px;
+  overflow:hidden;
+}
+.glide-track {
+  display:flex;
+  gap:20px;
+  animation:glide 60s linear infinite; /* speed: adjust duration here */
+}
+.glide-showcase:hover .glide-track {
+  animation-play-state: paused; /* pause when hovered */
+}
+@keyframes glide {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+.glide-showcase .card {
+  flex:0 0 250px;
+  height:380px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  padding:12px;
+}
+.glide-showcase .card img {
+  height:160px;
   object-fit:contain;
 }
-.price{color:#2e7d32;font-weight:bold}
-button{
-  width:100%;
-  padding:10px;
-  border:none;
-  background:#2e7d32;
-  color:#fff;
-  border-radius:5px;
-  cursor:pointer;
+.glide-showcase .card h3 {
+  margin:8px 0 4px;
 }
-button:hover{background:#1b5e20}
-
-/* Testimonials */
-.testimonial-wrapper{
-  margin:40px 0;
-  background:#e0f2f1;
-  overflow:hidden;
-  border-radius:8px;
-}
-.testimonial-track{
-  white-space:nowrap;
-  animation:scroll 30s linear infinite;
-}
-.testimonial-track span{
-  display:inline-block;
-  padding:15px 40px;
-  color:#1b5e20;
+.glide-showcase .card p {
+  font-family:'Marcellus',serif;
   font-size:14px;
+  color:#2e2e2e;
+  line-height:1.5;
+  font-style:italic;
+  flex:1;
+  margin:6px 0;
+  overflow:hidden;
 }
-@keyframes scroll{
-  0%{transform:translateX(100%)}
-  100%{transform:translateX(-100%)}
+.glide-showcase .price {
+  margin-top:auto;
+}
+.glide-showcase button {
+  margin-top:6px;
+}
+/* Herbal luxury store info frame with background bubbles */
+.store-info {
+  background: linear-gradient(135deg, #e8f5e9, #f0f7f1);
+  border: 2px solid #a5d6a7;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 30px auto;
+  max-width: 700px;
+  text-align: center;
+  box-shadow: 0 8px 24px rgba(27,94,32,0.12);
+  font-family: 'Marcellus', serif;
+  position: relative;
+  overflow: hidden;
 }
 
-/* Footer */
-.footer{
-  margin-top:40px;
-  text-align:center;
-  background:#e8f5e9;
-  padding:15px;
-  border-radius:8px;
+/* Decorative herbal bubbles */
+.store-info::before,
+.store-info::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(165, 214, 167, 0.25);
+  z-index: 0;
+}
+.store-info::before {
+  width: 180px;
+  height: 180px;
+  top: -40px;
+  left: -40px;
+}
+.store-info::after {
+  width: 250px;
+  height: 250px;
+  bottom: -60px;
+  right: -60px;
+}
+
+.store-info h2 {
+  margin: 0;
+  font-size: 28px;
+  color: #1b5e20;
+  position: relative;
+  z-index: 1;
+}
+
+.store-info p {
+  margin: 8px 0 0;
+  font-size: 16px;
+  color: #385a40;
+  position: relative;
+  z-index: 1;
 }
 </style>
-</head>
 
+</head>
 <body>
 
+
 <div id="cart-count">Cart: 0</div>
-<a id="admin-link" href="admin/admin.html">Admin</a>
-<a id="view-cart" href="cart/cart.html">View Cart</a>
-
-<h1 class="wordart">MILNAPATH HERBAL PRODUCTS STORE</h1>
-<p style="text-align:center;color:#2e7d32;font-weight:bold">
-BM House, SHOP 107 Samuel Ladoke Akintola Boulevard, Garki, Abuja
-</p>
-
-<!-- Filters -->
+<a id="admin-link" href="admin.html">Admin</a>
+<a id="view-cart" href="cart.html">View Cart</a>
+<div class="store-info">
+  <h2>MILNAPATH HERBAL PRODUCTS STORE</h2>
+  <p>21 C Crescent off B Avenue, Citec Estate,<br>
+     Airport Road, Jabi, Abuja FCT</p>
+</div>
 <div class="filters">
-<input id="searchInput" placeholder="Search products..." onkeyup="applyFilters()">
-<select id="categoryFilter" onchange="applyFilters()">
-<option value="all">All Categories</option>
-<option value="Drink">Drinks</option>
-<option value="Tea">Teas</option>
-<option value="Oil">Oils</option>
-<option value="General">General</option>
-</select>
+  <input id="searchInput" placeholder="Search products..." onkeyup="applyFilters()">
+  <select id="categoryFilter" onchange="applyFilters()">
+    <option value="all">All Categories</option>
+    <option value="Drink">Drinks</option>
+    <option value="Tea">Teas</option>
+    <option value="Oil">Oils</option>
+    <option value="Supplement">Supplements</option>
+    <option value="Herbal Medicine">Herbal Medicine</option>
+    <option value="Device">Devices</option>
+    <option value="Personal Care">Personal Care</option>
+  </select>
 </div>
-
-<!-- Products -->
+<div class="products">
+</div>
 <div class="products" id="products"></div>
-
-<!-- Testimonials BELOW products -->
 <div class="testimonial-wrapper">
-<div class="testimonial-track">
-<span>🌿 “Rejuvenating Drink boosted my energy naturally” – Jumoke</span>
-<span>🌿 “Glucomil helped stabilize my sugar levels” – Aisha</span>
-<span>🌿 “Detox Plus truly cleansed my system” – Chidi</span>
-<span>🌿 “Nakom Oil relieved my joint pains” – Fatima</span>
-</div>
+  <div class="testimonial-track">
+    <span>🌿 “Rejuvenating Drink boosted my energy naturally” – Jumoke</span>
+    <span>🌿 “Glucomil helped stabilize my sugar levels” – Aisha</span>
+    <span>🌿 “Detox Plus truly cleansed my system” – Chidi</span>
+    <span>🌿 “Nakom Oil relieved my joint pains” – Fatima</span>
+  </div>
 </div>
 
-<div class="footer">
-  Email:
-<a href="mailto:jumaiabdulsule@gmail.com">jumaiabdulsule@gmail.com</a>
-  |
-  Instagram:
-<a href="https://instagram.com/jumaiabdulsule">@jumaiabdulsule</a>
-</div>
+<!-- Consultation Form -->
+<section class="section-card">
+  <h2>Book a Test / Consultation</h2>
+  <p>Kindly provide your details to schedule a confidential wellness appointment.</p>
+  <form id="consultationForm" class="form-grid">
+    <input type="text" id="cName" placeholder="Full name" required>
+    <input type="tel" id="cPhone" placeholder="Phone / WhatsApp" required>
+    <input type="email" id="cEmail" placeholder="Email address">
+    <select id="cService" required>
+      <option value="">-- Select Service --</option>
+      <option value="Blood Sugar">Blood Sugar</option>
+      <option value="Blood Pressure">Blood Pressure</option>
+      <option value="Ulcer Screening">Ulcer Screening</option>
+      <option value="Haemoglobin">Haemoglobin</option>
+      <option value="General Consultation">General Consultation</option>
+    </select>
+    <input type="date" id="cDate" required>
+    <button type="submit">📅 Book appointment</button>
+    <p class="notice">*Please note: Delivery charges may be added based on your address.*</p>
+  </form>
+</section>
+
+<!-- Premium Wellness Showcase -->
+<section class="glide-showcase">
+  <h2>✨ Premium Wellness Showcase</h2>
+  <div class="glide-container">
+    <div class="glide-track">
+     
+        <!-- Curated product cards -->
+    <div class="card">
+      <img src="images/healthcode_coffee.jpg" alt="Healthcode Coffee">
+      <h3>Healthcode Coffee</h3>
+      <span class="brand-badge">Healthcode</span>
+      <p>Herbal coffee enriched with Ginseng & Ganoderma, traditionally used to support memory and vitality.</p>
+      <div class="price">₦11,400</div>
+      <button>🛒 <span>Add to Cart</span></button>
+    </div>
+
+    <div class="card">
+      <img src="images/bennutrita.jpg" alt="BenNutrita Meal Replacement">
+      <h3>BenNutrita Meal Replacement</h3>
+      <span class="brand-badge">BenNutrita</span>
+      <p>Organic superfood blend with 24g protein and essential amino acids for complete nourishment.</p>
+      <div class="price ">₦7000 per role of 10</div>
+      <button>🛒 <span>Add to Cart</span></button>
+    </div>
+
+    <div class="card">
+      <img src="images/blood_building_tea.jpg" alt="Blood Building Tea">
+      <h3>Blood Building Tea</h3>
+      <span class="brand-badge">Milnapath</span>
+      <p>Traditionally used to support healthy blood levels and natural body cleansing.</p>
+      <div class="price">₦15,000</div>
+      <button>🛒 <span>Add to Cart</span></button>
+    </div>
+
+    <div class="card">
+      <img src="images/peptic_tea.jpg" alt="Peptic Tea">
+      <h3>Peptic Tea</h3>
+      <span class="brand-badge">Milnapath</span>
+      <p>Supports digestion, metabolism, and immune function for overall digestive wellness.</p>
+      <div class="price">₦15,000</div>
+      <button>🛒 <span>Add to Cart</span></button>
+    </div>
+<div class="card">
+      <img src="images/healthcode_toothpaste.jpg" alt="Healthcode Herbal Toothpaste">
+      <h3>Healthcode Herbal Toothpaste</h3>
+      <span class="brand-badge">Healthcode</span>
+      <p>A premium White Teeth herbal formula designed to gently clean teeth, freshen breath, and support gum health. Traditionally used to help reduce bleeding, prevent cavities, and protect against bacteria, while providing long-lasting freshness and promoting overall oral wellness.</p>
+      <div class="price">₦6,600</div>
+      <button>🛒 <span>Add to Cart</span></button>
+    </div>
+    <div class="card">
+      <img src="images/nakom_oil.jpg" alt="Nakom Oil">
+      <h3>Nakom Oil</h3>
+      <span class="brand-badge">Milnapath</span>
+      <p>A 100% natural herbal oil traditionally used to support relief from inflammation, joint discomfort, allergies, and respiratory wellness.</p>
+      <div class="price">₦8000</div>
+      <button>🛒 <span>Add to Cart</span></button>
+    </div>
+     <div class="card">
+      <img src="images/healthcode_blower.jpg" alt="Terahertz Wave Blower Wand">
+      <h3>Terahertz Wave Blower Wand</h3>
+      <span class="brand-badge">Healthcode</span>
+      <p>An innovative wellness device designed to support comfort and mobility. Traditionally used to help ease pain, soothe joints, and provide relief for conditions such as knee arthritis, sports sprains, shoulder stiffness, cervical tension, and rheumatoid discomfort.</p>
+      <div class="price">₦18,000</div>
+      <button>🛒 <span>Add to Cart</span></button>
+    </div>
+    <!-- Add more curated cards for Gynomil, Glucomil, Detox Plus, D-Man, Kardiamil, Toothpaste, Blower Wand -->
+  </div>
+  </div>
+   <div class="scrollbar">
+     <div class="scroll-thumb"></div> </div>
+</section>
+<!-- Footer -->
+<footer>
+  <p>
+    <strong>Payment:</strong> Jumai Abdul Sule — 8242971170 — Moniepoint<br>
+    <strong>Location:</strong> 21 C Crescent off B Avenue, Citec Estate, Airport Road, Jabi, Abuja FCT<br>
+    <strong>Contact:</strong> WhatsApp +2347039249771 | Email: jumaiabdulsule@gmail.com
+  </p>
+  <p class="footer-note">
+    Curated by <strong>RoyalTechSolutions</strong><br>
+    <a href="https://royaltechsolutions.netlify.app" target="_blank">Explore Portfolio</a>
+  </p>
+</footer>
+
+<a href="https://wa.me/2347039249771" class="whatsapp-float" target="_blank">💬 Chat on WhatsApp</a>
 
 <script>
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 let allProducts = [];
 
 function updateCartCount(){
-  document.getElementById("cart-count").innerText =
-"Cart: " + cart.reduce((s,i)=>s+i.qty,0);
+  const products = JSON.parse(localStorage.getItem("products")||"[]");
+  const count = cart.reduce((s,i)=>s+i.qty,0);
+  const value = cart.reduce((s,i)=>{
+    const p = products.find(pp=>pp.id===i.id);
+    return s + (p ? p.price * i.qty : 0);
+  },0);
+  document.getElementById("cart-count").innerText = `Cart: ${count} | ₦${value}`;
 }
 
 async function loadProducts(){
-  const res = await fetch("products.json"); // <-- fetch local JSON
+  const res = await fetch('products.json');
   const data = await res.json();
-
-  allProducts = data.map(p=>({
-    ...p,
-    category: p.category ? p.category : "General"
-  }));
-
+  allProducts = data.map(p=>({...p,category:p.category?p.category:"General"}));
   localStorage.setItem("products",JSON.stringify(allProducts));
   renderProducts(allProducts);
 }
 
 function renderProducts(list){
-  const box = document.getElementById("products");
+  const box=document.getElementById("products");
   box.innerHTML="";
   list.forEach(p=>{
-    box.innerHTML += `
-<div class="card">
-<img src="${p.image}">
-<h3>${p.name}</h3>
-<p>${p.description}</p>
-<small>Category: ${p.category}</small>
-<div class="price">₦${p.price}</div>
-<button onclick="addToCart(${p.id})">Add to Cart</button>
-</div>
-    `;
+    box.innerHTML+=`<div class="card">
+      <img src="${p.image}" alt="${p.name}">
+      <h3>${p.name}</h3>
+      <span class="brand-badge">${p.brand}</span>
+      <p>${p.description}</p>
+      <small>Category: ${p.category}</small>
+      <div class="price">₦${p.price}</div>
+      <button onclick="addToCart(${p.id})">🛒 <span>Add to Cart</span></button>
+    </div>`;
   });
 }
 
 function applyFilters(){
-  const text = searchInput.value.toLowerCase();
-  const cat = categoryFilter.value;
-
-  renderProducts(allProducts.filter(p=>{
-    return (
-      (p.name.toLowerCase().includes(text) ||
-       p.description.toLowerCase().includes(text))
-&&
-      (cat==="all" || p.category===cat)
-    );
-  }));
+  const text=document.getElementById("searchInput").value.toLowerCase();
+  const cat=document.getElementById("categoryFilter").value;
+  renderProducts(allProducts.filter(p=>
+    (p.name.toLowerCase().includes(text)||p.description.toLowerCase().includes(text)) &&
+    (cat==="all"||p.category===cat)
+  ));
 }
 
 function addToCart(id){
-  const item = cart.find(i=>i.id===id);
-  if(item) item.qty++;
+  const item=cart.find(i=>i.id===id);
+  if(item)item.qty++;
   else cart.push({id,qty:1});
   localStorage.setItem("cart",JSON.stringify(cart));
   updateCartCount();
@@ -236,6 +467,106 @@ function addToCart(id){
 
 updateCartCount();
 loadProducts();
+
+// Consultation form -> WhatsApp + localStorage
+document.getElementById("consultationForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  const name = document.getElementById("cName").value.trim();
+  const phone = document.getElementById("cPhone").value.trim();
+  const email = document.getElementById("cEmail").value.trim();
+  const service = document.getElementById("cService").value;
+  const date = document.getElementById("cDate").value;
+
+   let message =
+`🌿 *MILNAPATH HERBAL PRODUCTS STORE*\n━━━━━━━━━━━━━━━━━━\n` +
+`📅 Appointment Date: ${date}\n` +
+`👤 Name: ${name}\n📞 Phone: ${phone}\n` +
+(email ? `✉️ Email: ${email}\n` : "") +
+`🧪 Requested Service: ${service}\n\n` +
+`🏦 *Payment Details*\nAccount Name: Jumai Abdul-Sule\nAccount Number: 8242971170\nBank Name: Moniepoint\n\n` +
+`✨ Thank you for choosing *luxury wellness* with us. We will confirm your appointment shortly.`;
+
+  const whatsappNumber = "2347039249771";
+  const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+  window.open(url,"_blank");
+
+  const consultations = JSON.parse(localStorage.getItem("consultations")||"[]");
+  consultations.push({
+    name, phone, email, service, date,
+    proofUploaded:false,
+    created:new Date().toLocaleString()
+  });
+  localStorage.setItem("consultations", JSON.stringify(consultations));
+
+  alert("Your consultation request has been sent via WhatsApp and saved for admin review.");
+  this.reset();
+});
+// Premium Showcase sliding bar + snapping
+const glideContainer = document.querySelector('.glide-container');
+const scrollbar = document.querySelector('.scrollbar');
+const thumb = document.querySelector('.scroll-thumb');
+
+function updateThumbSize() {
+  const visibleRatio = glideContainer.clientWidth / glideContainer.scrollWidth;
+  const minWidth = 60;
+  const thumbWidth = Math.max(minWidth, Math.floor(visibleRatio * scrollbar.clientWidth));
+  thumb.style.width = `${thumbWidth}px`;
+}
+
+function updateThumbPosition() {
+  const maxScroll = glideContainer.scrollWidth - glideContainer.clientWidth;
+  const maxThumbLeft = scrollbar.clientWidth - thumb.clientWidth;
+  const ratio = maxScroll > 0 ? glideContainer.scrollLeft / maxScroll : 0;
+  thumb.style.left = `${ratio * maxThumbLeft}px`;
+}
+
+function scrollToRatio(ratio) {
+  const maxScroll = glideContainer.scrollWidth - glideContainer.clientWidth;
+  glideContainer.scrollLeft = ratio * maxScroll;
+  updateThumbPosition();
+}
+
+let isDragging = false;
+thumb.addEventListener('mousedown', (e) => {
+  isDragging = true;
+  document.body.style.userSelect = 'none';
+  e.preventDefault();
+});
+document.addEventListener('mouseup', () => {
+  if (isDragging) snapToCard();
+  isDragging = false;
+  document.body.style.userSelect = '';
+});
+document.addEventListener('mousemove', (e) => {
+  if (!isDragging) return;
+  const rect = scrollbar.getBoundingClientRect();
+  let x = e.clientX - rect.left - thumb.clientWidth / 2;
+  x = Math.max(0, Math.min(x, rect.width - thumb.clientWidth));
+  thumb.style.left = `${x}px`;
+  const ratio = x / (rect.width - thumb.clientWidth);
+  scrollToRatio(ratio);
+});
+
+glideContainer.addEventListener('scroll', updateThumbPosition);
+window.addEventListener('resize', () => {
+  updateThumbSize();
+  updateThumbPosition();
+});
+
+function snapToCard() {
+  const firstCard = glideContainer.querySelector('.card');
+  if (!firstCard) return;
+  const gap = 20;
+  const cardWidth = firstCard.offsetWidth + gap;
+  const index = Math.round(glideContainer.scrollLeft / cardWidth);
+  const target = index * cardWidth;
+  glideContainer.scrollTo({ left: target, behavior: 'smooth' });
+}
+
+// Initialize
+updateThumbSize();
+updateThumbPosition();
+
 </script>
 
 </body>

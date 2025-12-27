@@ -3,114 +3,260 @@
 <head>
 <meta charset="UTF-8">
 <title>Your Cart - MILNAPATH HERBAL PRODUCTS STORE</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-body { font-family: Arial, sans-serif; padding:20px; background:#f4f4f4; }
-h2 { text-align:center; color:#2e7d32; }
-.item { background:#fff; padding:15px; margin-bottom:10px; border-radius:5px; box-shadow:0 2px 5px rgba(0,0,0,0.1);}
-button { padding:10px; width:100%; background:#2e7d32; color:white; border:none; border-radius:5px; cursor:pointer; margin-top:5px; transition:background 0.2s;}
-button:hover { background:#1b5e20; }
-input, select { padding:8px; width:100%; border-radius:5px; border:1px solid #ccc; margin-top:5px; margin-bottom:10px; }
-#order-section { background:#e0f2f1; padding:15px; border-radius:8px; margin-top:20px; }
-.back-link { display:inline-block; margin-bottom:20px; color:#1b5e20; font-weight:bold; text-decoration:none; }
+body {
+  font-family:Inter,Arial,sans-serif;
+  padding:20px;
+  background:#f0f7f1;
+  color:#17351c;
+}
+h2 {
+  text-align:center;
+  color:#2e7d32;
+  font-family:Marcellus,serif;
+  margin-bottom:8px;
+  animation:fadeInUp 1s ease forwards;
+}
+.sub {
+  font-size:14px;
+  text-align:center;
+  color:#4b7053;
+  margin-bottom:18px;
+}
+.item {
+  background:#fff;
+  padding:15px;
+  margin-bottom:10px;
+  border-radius:10px;
+  box-shadow:0 8px 22px rgba(27,94,32,0.08);
+  border:1px solid #c8e6c9;
+  transition:transform .3s ease;
+}
+.item:hover {transform:translateY(-3px)}
+.item strong {color:#1b5e20}
+button {
+  padding:12px;
+  width:100%;
+  background:linear-gradient(90deg,#2e7d32,#1b5e20);
+  color:white;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  margin-top:8px;
+  transition:.3s;
+  font-weight:700;
+  box-shadow:0 6px 18px rgba(27,94,32,0.15);
+  display:flex;align-items:center;justify-content:center;
+}
+button span {margin-left:6px;}
+button:hover {transform:translateY(-2px) scale(1.03);box-shadow:0 8px 20px rgba(27,94,32,0.25)}
+input, select {
+  padding:10px;
+  width:100%;
+  border-radius:10px;
+  border:1px solid #c8e6c9;
+  background:#fcfffd;
+  margin-top:6px;
+  margin-bottom:12px;
+}
+#order-section {
+  background:#ffffff;
+  padding:16px;
+  border-radius:12px;
+  margin-top:20px;
+  border:1px solid #c8e6c9;
+  box-shadow:0 8px 22px rgba(27,94,32,0.08);
+}
+a.back-btn {
+  display:inline-block;
+  margin-bottom:16px;
+  color:#1b5e20;
+  text-decoration:none;
+  font-weight:bold;
+}
+.notice {
+  color:#b71c1c;
+  font-size:13px;
+  margin-top:8px;
+}
+footer {
+  text-align:center;
+  background:#2e7d32;
+  color:#fff;
+  padding:24px;
+  border-radius:12px;
+  margin-top:34px;
+}
+footer a {color:#fff;text-decoration:none;font-weight:bold}
+.whatsapp-float {
+  position:fixed;
+  bottom:80px;
+  right:20px;
+  background:#25D366;
+  color:#fff;
+  padding:12px 18px;
+  border-radius:30px;
+  font-weight:bold;
+  box-shadow:0 0 15px rgba(0,0,0,0.3);
+  transition:transform .3s ease;
+  z-index:999;
+  animation:pulse 2.5s infinite;
+}
+.whatsapp-float:hover {transform:scale(1.05)}
+@keyframes pulse {
+  0%{transform:scale(1)}
+  50%{transform:scale(1.05)}
+  100%{transform:scale(1)}
+}
+@keyframes fadeInUp {from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
 <body>
 
-<a href="../index.html" class="back-link">⬅ Back to Store</a>
 <h2>Your Cart</h2>
+<p class="sub">Premium wellness, handled with care.</p>
+<a href="index.html" class="back-btn">⬅ Back to Store</a>
 <div id="cart-items"></div>
 
 <div id="order-section">
-<label>
-    Shipment Method:<br>
-<select id="shipment">
-<option value="">-- Select --</option>
-<option value="Pickup">Pickup</option>
-<option value="Delivery">Delivery</option>
-</select>
-</label>
-<label>
-    Upload Proof of Payment:<br>
-<input type="file" id="payment-proof" accept="image/*">
-</label>
-<button onclick="orderWhatsApp()">Order via WhatsApp</button>
-<button onclick="clearCart()" style="background:#b71c1c;">Clear Cart</button>
+  <label>Customer Name:<br>
+    <input type="text" id="customerName" placeholder="Enter your name">
+  </label>
+
+  <label>Delivery Method:<br>
+    <select id="shipment">
+      <option value="">-- Select --</option>
+      <option value="Pickup">Pickup</option>
+      <option value="Delivery">Delivery</option>
+      <option value="Courier">Courier</option>
+    </select>
+  </label>
+
+  <label>Upload Proof of Payment (optional):<br>
+    <input type="file" id="payment-proof" accept="image/*">
+  </label>
+
+  <p class="notice">🚚 Note: Delivery charges may apply depending on your location.</p>
+
+  <button onclick="orderWhatsApp()">🛒 <span>Order via WhatsApp</span></button>
+  <button onclick="clearCart()" style="background:#b71c1c;">🗑 <span>Clear Cart</span></button>
+
+  <div style="margin-top:14px;font-size:13px;color:#4b7053;line-height:1.6">
+    <strong>Payment details:</strong><br>
+    Account Name: Jumai Abdul-Sule<br>
+    Account Number: 8242971170<br>
+    Bank Name: Moniepoint
+  </div>
 </div>
+
+<footer>
+  <p>
+    <strong>Payment:</strong> Jumai Abdul Sule — 8242971170 — Moniepoint<br>
+    <strong>Location:</strong> 21 C Crescent off B Avenue, Citec Estate, Airport Road, Jabi, Abuja FCT<br>
+    <strong>Contact:</strong> WhatsApp +2347039249771 | Email: jumaiabdulsule@gmail.com
+  </p>
+  <p style="margin-top:12px;">
+    Curated by <strong>RoyalTechSolutions</strong><br>
+    <a href="https://royaltechsolutions.netlify.app" target="_blank">Explore Portfolio</a>
+  </p>
+</footer>
+
+<a href="https://wa.me/2347039249771" class="whatsapp-float" target="_blank">💬 Chat on WhatsApp</a>
 
 <script>
-const STORE = {
-  whatsapp: "2347039249771",
-  name: "MILNAPATH HERBAL PRODUCTS STORE",
-  address: "BM House, SHOP 107 Samuel Ladoke Akintola Boulevard, Garki, Abuja 900110, FCT, Nigeria"
-};
+const STORE={whatsapp:"2347039249771",name:"MILNAPATH HERBAL PRODUCTS STORE",address:"21 C Crescent off B Avenue, Citec Estate, Airport Road, Jabi, Abuja FCT"};
+let cart=JSON.parse(localStorage.getItem("cart")||"[]");
+const container=document.getElementById("cart-items");
+let productsList=[];
 
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-const container = document.getElementById("cart-items");
-
-async function loadCart() {
-  const res = await fetch("../products.json"); // <-- local JSON
-  const products = await res.json();
-  container.innerHTML = "";
-
-  let message = `Hello, I want to order from ${STORE.name}:%0A%0A`;
-  let total = 0;
-
-  cart.forEach(item => {
-    const product = products.find(p => p.id === item.id);
+async function loadCart(){
+  const res=await fetch('products.json');
+  productsList=await res.json();
+  // filter out invalid items
+  cart=cart.filter(item=>productsList.some(p=>p.id===item.id));
+  container.innerHTML="";
+  if(cart.length===0){
+    container.innerHTML="<p style='text-align:center;color:#4b7053;'>🛒 Your cart is empty.</p>";
+    return;
+  }
+  cart.forEach(item=>{
+    const product=productsList.find(p=>p.id===item.id);
     if(!product) return;
-    const subtotal = product.price * item.qty;
-    total += subtotal;
-
-    container.innerHTML += `
-<div class="item">
-<strong>${product.name}</strong><br>
-        ₦${product.price} × ${item.qty} = ₦${subtotal}<br>
-<button onclick="removeItem(${item.id})">Remove</button>
-</div>
-    `;
-
-    message += `• ${product.name} × ${item.qty} = ₦${subtotal}%0A`;
+    const subtotal=product.price*item.qty;
+    container.innerHTML+=`
+      <div class="item">
+        <strong>${product.name}</strong><br>
+        ₦${product.price.toLocaleString()} × ${item.qty} = ₦${subtotal.toLocaleString()}
+        <br><button onclick="removeItem(${item.id})">🗑 <span>Remove</span></button>
+      </div>`;
   });
-
-  message += `%0ATotal: ₦${total}%0A`;
-  message += `%0APickup Address: ${STORE.address}`;
-
-  window.whatsappMessage = message;
 }
 
-function removeItem(id) {
-  cart = cart.filter(item => item.id !== id);
-  localStorage.setItem("cart", JSON.stringify(cart));
+function removeItem(id){
+  cart=cart.filter(item=>item.id!==id);
+  localStorage.setItem("cart",JSON.stringify(cart));
   loadCart();
 }
-
-function clearCart() {
+function clearCart(){
   localStorage.removeItem("cart");
-  cart = [];
+  cart=[];
   loadCart();
 }
 
-function orderWhatsApp() {
-  const shipment = document.getElementById("shipment").value;
-  const fileInput = document.getElementById("payment-proof");
-  let extraMsg = "";
-  if(shipment) extraMsg += `%0AShipment Method: ${shipment}`;
-  if(fileInput.files.length > 0) extraMsg += `%0AProof of Payment Uploaded`;
+function orderWhatsApp(){
+  if(cart.length===0){alert("Your cart is empty.");return;}
+  const shipment=document.getElementById("shipment").value;
+  if(!shipment){alert("Please select a delivery method.");return;}
+  const fileInput=document.getElementById("payment-proof");
+  const name=(document.getElementById("customerName").value||"").trim();
 
-  const url = `https://wa.me/${STORE.whatsapp}?text=${window.whatsappMessage}${extraMsg}`;
-  window.open(url, "_blank");
+  // Header
+  let header = `🌿 *${STORE.name}*\n━━━━━━━━━━━━━━━━━━\n`;
+  header += `📅 Date: ${new Date().toLocaleDateString()}\n`;
+  if(name)   header += `📅 Date: ${new Date().toLocaleDateString()}\n`;
+  if(name) header += `👤 Customer: ${name}\n`;
+  header += `🚚 Delivery Method: ${shipment}\n\n`;
 
-  // Save order + shipment + proof info in localStorage for admin
-  const orders = JSON.parse(localStorage.getItem("orders") || "[]");
-  orders.push({
-    items: cart,
-    shipment: shipment || "Not selected",
-    proofUploaded: fileInput.files.length > 0,
-    date: new Date().toLocaleString()
+  // Items
+  let lines = "🧾 *Order Summary*\n";
+  let total = 0;
+  cart.forEach((item,i)=>{
+    const product = productsList.find(p=>p.id===item.id);
+    if(product){
+      const sub = product.price * item.qty;
+      total += sub;
+      lines += `${i+1}) ${product.name} — ${item.qty} × ₦${product.price.toLocaleString()} = ₦${sub.toLocaleString()}\n`;
+    }
   });
-  localStorage.setItem("orders", JSON.stringify(orders));
 
-  alert("Order has been sent to WhatsApp and saved for admin review!");
+  // Footer + payment + delivery note
+  let footer = `\n━━━━━━━━━━━━━━━━━━\n💰 *Total:* ₦${total.toLocaleString()}\n`;
+  footer += `🚚 *Delivery Charges:* May apply depending on location\n\n`;
+  footer += `🏦 *Payment Details*\n`;
+  footer += `Account Name: Jumai Abdul-Sule\n`;
+  footer += `Account Number: 8242971170\n`;
+  footer += `Bank Name: Moniepoint\n\n`;
+  footer += `🏠 Pickup/Delivery Address:\n${STORE.address}\n\n`;
+  footer += `✨ Thank you for choosing *luxury wellness* with us!`;
+
+  const proofNote = fileInput.files.length>0 ? "\n📎 Proof of Payment: Uploaded" : "";
+  const url=`https://wa.me/${STORE.whatsapp}?text=${encodeURIComponent(header+lines+footer+proofNote)}`;
+  window.open(url,"_blank");
+
+  // Persist order for admin
+  const orders=JSON.parse(localStorage.getItem("orders")||"[]");
+  orders.push({
+    items:cart,
+    shipment:shipment || "Not selected",
+    proofUploaded:fileInput.files.length>0,
+    customer:name || "",
+    date:new Date().toLocaleString()
+  });
+  localStorage.setItem("orders",JSON.stringify(orders));
+
+  alert("Order sent via WhatsApp and saved for admin review.");
   clearCart();
 }
 
